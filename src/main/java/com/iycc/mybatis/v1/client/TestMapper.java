@@ -1,4 +1,4 @@
-package com.iycc.orm.v1.client;
+package com.iycc.mybatis.v1.client;
 
 /**
  * Created by iycc on 2018/4/4.

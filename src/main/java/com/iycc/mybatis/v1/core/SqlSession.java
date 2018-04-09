@@ -1,4 +1,4 @@
-package com.iycc.orm.v1.core;
+package com.iycc.mybatis.v1.core;
 
 /**
  * Created by iycc on 2018/4/4.

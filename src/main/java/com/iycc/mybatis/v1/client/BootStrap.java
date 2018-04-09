@@ -1,8 +1,8 @@
-package com.iycc.orm.v1.client;
+package com.iycc.mybatis.v1.client;
 
-import com.iycc.orm.v1.core.Configuration;
-import com.iycc.orm.v1.core.SimpleExecutor;
-import com.iycc.orm.v1.core.SqlSession;
+import com.iycc.mybatis.v1.core.Configuration;
+import com.iycc.mybatis.v1.core.SimpleExecutor;
+import com.iycc.mybatis.v1.core.SqlSession;
 
 /**
  * Created by iycc on 2018/4/4.

@@ -1,6 +1,6 @@
-package com.iycc.orm.v1.core;
+package com.iycc.mybatis.v1.core;
 
-import com.iycc.orm.v1.client.Test;
+import com.iycc.mybatis.v1.client.Test;
 
 import java.sql.*;
 
