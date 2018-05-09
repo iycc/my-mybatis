@@ -1,5 +1,8 @@
 package com.iycc.mybatis.v2.config;
 
+import com.iycc.mybatis.v2.plugin.Interceptor;
+import com.iycc.mybatis.v2.plugin.InterceptorChain;
+
 import java.io.IOException;
 
 /**
@@ -10,6 +13,8 @@ public class Configuration {
 
     private MapperRegistry mapperRegistry = new MapperRegistry();
 
+    private InterceptorChain interceptorChain = new InterceptorChain();
+
     public Configuration scanPath(String scanPath) {
         this.scanPath = scanPath;
         return this;
@@ -19,11 +24,28 @@ public class Configuration {
         if (null == scanPath || scanPath.length() < 1) {
             throw new RuntimeException("scan path is required .");
         }
-        // TODO 扫描注解 加入 mapperRegistry
+        mapperRegistry.registry(scanPath);
+        addPlugins();
+
     }
 
-    public static void main(String[] args) throws IOException {
-        new Configuration().scanPath("com/iycc/mybatis/v2/config/mappers").build();
+    /**
+     * plugin step3：注册所有的plugin
+     */
+    private void addPlugins() {
+        try {
+            ClassPathHelper.getClasses("com.iycc.mybatis.v2.plugin").stream().filter( cls -> {
+                return !cls.isInterface() && Interceptor.class.isAssignableFrom(cls);
+            }).forEach(cls -> {
+                try {
+                    interceptorChain.addInterceptor((Interceptor)cls.newInstance());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public MapperRegistry getMapperRegistry() {
@@ -32,5 +54,9 @@ public class Configuration {
 
     public void setMapperRegistry(MapperRegistry mapperRegistry) {
         this.mapperRegistry = mapperRegistry;
+    }
+
+    public InterceptorChain getInterceptorChain() {
+        return interceptorChain;
     }
 }

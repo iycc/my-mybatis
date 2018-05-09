@@ -24,7 +24,9 @@ public class MapperProxy<T> implements InvocationHandler {
                         .getMapperRegistry().methodSqlMapping
                         .get(method.getDeclaringClass().getName() + "." + method.getName());
         if (null != mapperData) {
+            System.out.println("--------------" + this.getClass().getName() + "--------------");
             System.out.println(String.format("SQL [ %s ], parameter [%s] ", mapperData.getSql(), args[0]));
+            System.out.println("-------------------------------------------------------------------");
             return sqlSession.selectOne(mapperData, String.valueOf(args[0]));
         }
         return null;

@@ -11,3 +11,5 @@
 * 升级Configuration，支持注解配置sql
 * 升级SimpleExecutor，增加ResultSetHandler处理结果集
 * 增加CachingExecutor
+### v2.1
+* 增加plugin功能
